@@ -1,8 +1,10 @@
 # Node Blog
 
+
 ## 目标
 - 基本功能
 - server端开发
+
 
 ## 需求
 - 首页、作者主页、博客详情页
@@ -34,7 +36,18 @@
 | --- |  ------  |  ------  | ----- | ------ |
 | 获取博客列表  | /api/blog/list   | get | author，keyword | 参数为空，则不进行查询 |
 | 获取博客内容  | /api/blog/detail | get | id |  |
-| 新增博客     | /api/blog/new    | post |  |  |
-| 更新博客     | /api/blog/update | post | id |  |
+| 新增博客     | /api/blog/new    | post | author，content |  |
+| 更新博客     | /api/blog/update | post | id，content |  |
 | 删除博客     | /api/blog/del    | post | id |  |
 | 登录        | /api/user/login  | post |  |  |
+
+
+## 开发
+
+### 开发接口
+- nodejs处理http请求
+    - get请求 querystring
+    - post请求 postdata
+    - 路由
+- 搭建开发环境
+- 开发接口
