@@ -51,3 +51,8 @@
     - 路由
 - 搭建开发环境
 - 开发接口
+
+### 搭建开发环境
+- 原生node
+- 使用nodemon检测文件变化，自动重启node
+- 使用cross-env设置环境变量，兼容mac Linux windows
