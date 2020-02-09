@@ -15,10 +15,10 @@ const getPostData = (req) => {
         }
 
         let postData = '';
-        res.on('data', chunk => {
+        req.on('data', chunk => {
             postData += chunk.toString();
         })
-        res.on('end', () => {
+        req.on('end', () => {
             if (!postData) {
                 resolve({});
                 return;
