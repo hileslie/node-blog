@@ -124,3 +124,10 @@
 
     - 封装：将其封装为系统可用的工具
     - 使用：让API直接操作数据库
+
+- 登录
+    - 登录校验，server端操作cookie
+    - 登录信息存储
+    - cookie 和 session
+    - session写入redis
+    - nginx反向代理
