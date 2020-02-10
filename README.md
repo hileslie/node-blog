@@ -130,4 +130,13 @@
     - 登录信息存储
     - cookie 和 session
     - session写入redis
-    - nginx反向代理
+
+    > 直接将session定义为js变量，是放在nodejs进程内存中
+    > 问题1：进程内存有限，访问量过大，内存暴增怎么办？
+    > 问题2：正式线上运行是多进程，进程之间内存无法共享
+    > 解决：将session存在redis中
+
+- nodejs操作redis
+    - 封装：将其封装为系统可用的工具
+
+- nginx反向代理
