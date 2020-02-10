@@ -81,7 +81,7 @@ const serverHandle = (req, res) => {
         set(userId, {});
     }
     get(userId).then(val => {
-        req.session = val;
+        req.session = val || {};
         req.sessionId = userId;
         // 处理postData
         getPostData(req).then(postData => {
