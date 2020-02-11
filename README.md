@@ -136,7 +136,14 @@
     > 问题2：正式线上运行是多进程，进程之间内存无法共享
     > 解决：将session存在redis中
 
-- nodejs操作redis
+- nodejs操作redis：brew install redis
     - 封装：将其封装为系统可用的工具
 
-- nginx反向代理
+- nginx
+    - 反向代理：前端与后端联调
+    > 例子：前端127.0.0.1:8001启动服务，server端127.0.0.1:8000启动服务，nginx端口设置8089，根据路径设置代理。页面访问127.0.0.1:8098，很具访问路径，请求前端或者server端服务
+    - 静态服务(cdn)
+    - 负载均衡
+> brew install nginx
+> MAC: /usr/loacl/etc/nginx/nginx.conf
+    
