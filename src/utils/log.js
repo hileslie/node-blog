@@ -15,15 +15,15 @@ function createWriteStream(fileName) {
     return writeStream;
 }
 
-// 写访问日志
+// 写访问日志 access.log
 const accessWriteStream = createWriteStream('access.log');
 function access(log) {
     writeLog(accessWriteStream, log)
 }
 
-// 写错误日志
+// 写错误日志 error.log
 
-// 写事件日志
+// 写事件日志 event.log
 
 module.exports = {
     access

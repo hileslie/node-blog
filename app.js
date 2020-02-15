@@ -3,6 +3,7 @@ const handleBlogRouter = require('./src/router/blog');
 const handleUserRouter = require('./src/router/user');
 const { get, set } = require('./src/db/redis');
 const { access } = require('./src/utils/log');
+// const env = process.env.NODE_ENV;
 
 // session数据
 // const SESSION_DATA = {};
@@ -44,6 +45,8 @@ const getPostData = (req) => {
 
 const serverHandle = (req, res) => {
     // 记录 access log
+    // if (env === 'dev') {}
+    // if (env === 'production') {}
     access(`${req.method} -- ${req.url} -- ${req.headers['user-agent']} -- ${Date.now()}`)
 
     // 设置返回格式 JSON

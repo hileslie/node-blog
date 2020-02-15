@@ -154,7 +154,22 @@
 #### 日志操作（存储在文件中）
 - nodejs文件操作（nodejs stream）
 - 日志功能开发和使用
-- 日志文件拆分，日志内容分析
+- 日志文件拆分（服务端）
+    - 按文件存储日志
+    - 按时间划分日志
+    - 实现方式： Linux的crontab命令（定时任务）
+        - 设置定时任务，格式： * * * * * command ——> 分 小时 日期 月份 星期 command
+            - 记录copy.sh位置 /Users/leslie/Documents/personal/node-blog/src/utils/copy.sh
+            - node-blog 下，执行 crontab -e
+            - 进入文件，填写 * 0 * * * sh /Users/leslie/Documents/personal/node-blog/src/utils/copy.sh
+            - crontab -l 查看定时任务列表
+        - 例：将access.log拷贝并重命名为2020-02-15.access.log
+        - 情况access.log文件，继续积累日志
+
+- 日志内容分析
+    - 如针对caaess.log日志，分析Chrome的占比
+    - 日志是按行存储，一行就是一条日志
+    - 使用nodejs的readline（基于stream，效率高）
 
 #### IO操作的性能瓶颈
 - IO包括 网络IO 和 文件IO
