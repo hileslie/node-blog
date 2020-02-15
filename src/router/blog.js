@@ -26,8 +26,16 @@ const handleBlogRouter = (req, res) => {
 
     // 获取列表
     if (GET && path === '/api/blog/list') {
-        const author = req.query.author || '';
+        let author = req.query.author || '';
         const keyword = req.query.keyword || '';
+        if (req.query.isadmin) {
+            const loginCheckResult = loginCheck(req);
+            if (loginCheckResult) {
+                // 未登录
+                return loginCheckResult;
+            }
+            author = req.session.username;
+        }
         const result = getList(author, keyword);
         return result.then(listData => {
             return new SuccessModel(listData);

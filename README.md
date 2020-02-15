@@ -125,11 +125,11 @@
     - 封装：将其封装为系统可用的工具
     - 使用：让API直接操作数据库
 
-- 登录
-    - 登录校验，server端操作cookie
-    - 登录信息存储
-    - cookie 和 session
-    - session写入redis
+### 登录
+- 登录校验，server端操作cookie
+- 登录信息存储
+- cookie 和 session
+- session写入redis
 
     > 直接将session定义为js变量，是放在nodejs进程内存中
     > 问题1：进程内存有限，访问量过大，内存暴增怎么办？
@@ -139,11 +139,23 @@
 - nodejs操作redis：brew install redis
     - 封装：将其封装为系统可用的工具
 
-- nginx
-    - 反向代理：前端与后端联调
-    > 例子：前端127.0.0.1:8001启动服务，server端127.0.0.1:8000启动服务，nginx端口设置8089，根据路径设置代理。页面访问127.0.0.1:8098，很具访问路径，请求前端或者server端服务
+### nginx
+- 反向代理：前端与后端联调
+    > 例子：前端127.0.0.1:8001启动服务，server端127.0.0.1:8000启动服务，nginx端口设置8089，根据路径设置代理。页面访问127.0.0.1:8090，根据访问路径，请求前端或者server端服务
     - 静态服务(cdn)
     - 负载均衡
 > brew install nginx
 > MAC: /usr/loacl/etc/nginx/nginx.conf
+
+### 日志
+- 访问日志 access log （server端）
+- 自定义日志 （包括自定义事件、错误记录等）
+
+#### 日志操作（存储在文件中）
+- nodejs文件操作（nodejs stream）
+- 日志功能开发和使用
+- 日志文件拆分，日志内容分析
+
+#### IO操作的性能瓶颈
+- IO包括 网络IO 和 文件IO
     

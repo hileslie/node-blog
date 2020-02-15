@@ -43,6 +43,7 @@
             <ul class="blogs">
                 <li class="blog" v-for="(x, index) in list" :key="index">
                     <div>{{x.title}}</div>
+                    <div>{{x.author}}</div>
                     <div>
                         <a @click="check(x)">查看</a>
                         <a @click="edit(x)">编辑</a>
@@ -93,7 +94,7 @@
             },
             // 列表
             getList() {
-                axios.get('/api/blog/list')
+                axios.get(`/api/blog/list?isadmin=1&keyword=${this.searchContent}`)
                 .then((res) => {
                     // handle success
                     if(res.data && res.data.error === 0) {
@@ -109,7 +110,9 @@
                 });
             },
             // 搜索
-            search() {},
+            search() {
+                this.getList();
+            },
             // 新建
             add() {
                 window.location.href = `/edit.html?tag=2`;
