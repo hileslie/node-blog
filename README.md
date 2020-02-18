@@ -69,7 +69,7 @@
     | -------- | ----------- | -----  | ------- | -------- | ----- |
     | id       | int         | Y      | Y       | Y        |       |
     | username | varchar(20) |        | Y       |          |       |
-    | password | varchar(20) |        | Y       |          |       |
+    | password | varchar(32) |        | Y       |          |       |
     | realname | varchar(10) |        | Y       |          |       |
     | state    | int         |        | Y       |          | 1     |
 
@@ -173,4 +173,28 @@
 
 #### IO操作的性能瓶颈
 - IO包括 网络IO 和 文件IO
-    
+
+### 安全
+- sql注入：窃取数据库内容
+- xss攻击：窃取前端的cookie内容
+- 密码加密：保证用户信息安全
+
+
+## 总结
+- 功能模块、流程
+    - 处理http接口
+    - 连接数据库
+    - 实现登录
+    - 安全
+    - 日志
+- 核心知识点
+    - http、路由、mysql
+    - cookie、session、redis、nginx
+    - sql注入、xss攻击、密码加密
+    - 日志、stream、contrab、readline
+- server端和前端的区别
+    - 服务稳定性
+    - 内存cpu
+    - 日志记录
+    - 安全
+    - 集群、服务拆分

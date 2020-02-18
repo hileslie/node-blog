@@ -1,4 +1,5 @@
 const { exec } = require('../db/mysql');
+const xss = require('xss');
 const getList = (author, keyword) => {
     // 1=1 保证author, keyword都没传的情况，也能查
     let sql = `select * from blogs where 1=1 `;
@@ -21,7 +22,10 @@ const getDetail = (id) => {
 }
 
 const newBlog = (blogData = {}) => {
-    const { title, content, author } = blogData;
+    // 防止xss攻击
+    const content = xss(blogData.title);
+    
+    const { title, author } = blogData;
     const createtime = Date.now();
     const sql = `insert into blogs (title,content,createtime,author) 
     value ('${title}','${content}','${createtime}','${author}');`
