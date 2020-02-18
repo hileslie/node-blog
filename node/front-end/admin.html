@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=div, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/qs/6.9.0/qs.js"></script>
+    <title>Document</title>
+    <style>
+        .blogs {
+            list-style: none;
+            max-width: 500px;
+        }
+        .blog {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+        }
+        a {
+            cursor: pointer;
+            color: rgb(30, 9, 223);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>管理平台</h1>
+        <div>
+            <h2>登录</h2>
+            <div>
+                <input type="text" v-model="username">
+                <input type="text" v-model="password">
+                <button @click="login">登录</button>
+            </div>
+        </div>
+        <div>
+            <h2>博客列表</h2>
+            <input type="text" v-model="searchContent">
+            <button @click="search()">搜索</button>
+            <button @click="add()">新建</button>
+            <ul class="blogs">
+                <li class="blog" v-for="(x, index) in list" :key="index">
+                    <div>{{x.title}}</div>
+                    <div>{{x.author}}</div>
+                    <div>
+                        <a @click="check(x)">查看</a>
+                        <a @click="edit(x)">编辑</a>
+                        <a @click="del(x)">删除</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                username: '',
+                password: '',
+                searchContent: '',
+                list: [],
+            }
+        },
+        created() {
+            this.getList();
+        },
+        methods: {
+            // 登录
+            login() {
+                console.log(this.username, this.password)
+                axios({
+                    method: 'post',
+                    url: '/api/user/login',
+                    data: {
+                        'username': this.username,
+                        'password': this.password,
+                    },
+                    headers: { 'content-type': 'application/json'},
+                })
+                .then((res) => {
+                    console.log('res: ', res);
+                    // handle success
+                    if(res.data && res.data.error === 0) {
+                        alert('成功')
+                    } else {
+                        alert(res.data.message)
+                    }
+                })
+            },
+            // 列表
+            getList() {
+                axios.get(`/api/blog/list?isadmin=1&keyword=${this.searchContent}`)
+                .then((res) => {
+                    // handle success
+                    if(res.data && res.data.error === 0) {
+                        this.list = res.data.data;
+                    }
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+                .then(function () {
+                    // always executed
+                });
+            },
+            // 搜索
+            search() {
+                this.getList();
+            },
+            // 新建
+            add() {
+                window.location.href = `/edit.html?tag=2`;
+            },
+            // 查看
+            check(x) {
+                window.location.href = `/edit.html?id=${x.id}&tag=0`;
+            },
+            // 编辑
+            edit(x) {
+                window.location.href = `/edit.html?id=${x.id}&tag=1`;
+            },
+            // 删除
+            del(x) {
+                axios.post(`/api/blog/del?id=${x.id}`)
+                .then((res) => {
+                    // handle success
+                    if(res.data && res.data.error === 0) {
+                        this.getList();
+                    } else {
+                        alert(res.data.message)
+                    }
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+            },
+        }
+    })
+</script>

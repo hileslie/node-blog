@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+    <style>
+        .blogs {
+            list-style: none;
+            max-width: 500px;
+        }
+        .blog {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+        }
+        a {
+            cursor: pointer;
+            color: rgb(30, 9, 223);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>前台</h1>
+        <div>
+            <h2>博客列表</h2>
+            <ul class="blogs">
+                <li class="blog" v-for="(x, index) in list" :key="index">
+                    <div>{{x.title}}</div>
+                    <div>
+                        <a @click="check(x)">查看</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                list: [],
+            }
+        },
+        created() {
+            this.getList();
+        },
+        mounted() {
+        },
+        methods: {
+            // 列表
+            getList() {
+                axios.get('/api/blog/list')
+                .then((res) => {
+                    // handle success
+                    if(res.data && res.data.error === 0) {
+                        this.list = res.data.data;
+                    }
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+                .then(function () {
+                    // always executed
+                });
+            },
+            // 查看
+            check(x) {
+                window.location.href = `/edit.html?id=${x.id}&tag=0`;
+            }
+        }
+    })
+</script>

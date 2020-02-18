@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{tag}}</h1>
+        <div>
+            <input type="text" v-model="title">
+        </div>
+        <div>
+            <textarea name="" cols="30" rows="10" v-model="content"></textarea>
+        </div>
+        <button v-if="showBtn" @click="add">提交</button>
+    </div>
+</body>
+</html>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                tag: '', // 0 查看 1 编辑 2 新增
+                title: '',
+                content: '',
+                id: 0,
+                showBtn: false,
+            }
+        },
+        created() {
+            let arr = window.location.search.replace('?', '').split('&');
+            let obj = {};
+            arr.forEach(item => {
+                let brr = item.split('=')
+                obj[brr[0]] = brr[1];
+            })
+            this.id = obj.id;
+            this.tag = obj.tag;
+            console.log(this.id, this.tag)
+
+            if (this.tag == 0 || this.tag == 1) {
+                this.getDetail();
+            }
+
+            if (this.tag == 1 || this.tag == 2) {
+                this.showBtn= true;
+            }
+        },
+        methods: {
+            // 内容
+            getDetail () {
+                axios.get(`/api/blog/detail?id=${this.id}`)
+                .then((res) => {
+                    if(res.data && res.data.error === 0) {
+                        this.title = res.data.data.title;
+                        this.content = res.data.data.content;
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            },
+            // 新增/更新
+            add() {
+                if (this.tag == 2) {
+                    axios({
+                        method: 'post',
+                        url: '/api/blog/new',
+                        data: {
+                            title: this.title,
+                        content: this.content,
+                        },
+                        headers: { 'content-type': 'application/json'},
+                    })
+                    .then((res) => {
+                        console.log('res.data', res.data)
+                        if(res.data && res.data.error === 0) {
+                            alert('成功')
+                        } else {
+                            alert(res.data.message)
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+                }
+                if (this.tag == 1) {
+                    axios({
+                        method: 'post',
+                        url: `/api/blog/update?id=${this.id}`,
+                        data: {
+                            title: this.title,
+                            content: this.content,
+                        },
+                        headers: { 'content-type': 'application/json'},
+                    })
+                    .then((res) => {
+                        console.log('res.data', res.data)
+                        if(res.data && res.data.error === 0) {
+                            alert('成功')
+                        } else {
+                            alert(res.data.message)
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    })
+                }
+            }
+        }
+    })
+</script>
