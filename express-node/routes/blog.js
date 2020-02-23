@@ -14,14 +14,14 @@ router.get('/list', function (req, res, next) {
 	// 获取列表
 	let author = req.query.author || '';
 	const keyword = req.query.keyword || '';
-	// if (req.query.isadmin) {
-	// 	const loginCheckResult = loginCheck(req);
-	// 	if (loginCheckResult) {
-	// 		// 未登录
-	// 		return loginCheckResult;
-	// 	}
-	// 	author = req.session.username;
-	// }
+	if (req.query.isadmin) {
+		if (req.session.username === null) {
+			// 未登录
+			res.json(new ErrorModel('未登录'));
+			return;
+		}
+		author = req.session.username;
+	}
 	const result = getList(author, keyword);
 	return result.then(listData => {
 		res.json(new SuccessModel(listData));

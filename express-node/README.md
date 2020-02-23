@@ -4,3 +4,11 @@
 - express 下载、安装、使用
 - express 中间件机制
 - 开发接口、连接数据库、登录、日志
+
+## 开发
+
+### 连接mysql
+
+### 登录
+- express-session、connect-redis
+- req.session 保存登录信息，登录校验做成express中间件
