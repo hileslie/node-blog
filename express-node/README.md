@@ -22,3 +22,7 @@
 - access log 记录，直接使用脚手架推荐的morgan
 - 自定义日志使用console.log 和 console.error 即可
 - 日志文件拆分、日志内容分析
+
+## 总结
+
+### express中间件原理
