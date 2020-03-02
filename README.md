@@ -13,9 +13,20 @@
 ## 目录
 - PM2介绍
     - 下载安装
+
         `npm install pm2 -g`
+
     - 基本使用
-        ``
+
+        `pm2 start` 
+        `pm2 list`
+        `pm2 restart <AppName>/<id>`
+        `pm2 stop <AppName>/<id>`
+        `pm2 delete <AppName>/<id>`
+        `pm2 info <AppName>/<id>`
+        `pm2 log <AppName>/<id>`
+        `pm2 monit <AppName>/<id>`
+
     - 常用命令
 - PM2进程守护
 - PM2配置和日志记录
