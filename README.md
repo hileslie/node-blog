@@ -19,6 +19,9 @@
     - 基本使用
 
         `pm2 start` 
+
+    - 常用命令
+
         `pm2 list`
         `pm2 restart <AppName>/<id>`
         `pm2 stop <AppName>/<id>`
@@ -27,7 +30,6 @@
         `pm2 log <AppName>/<id>`
         `pm2 monit <AppName>/<id>`
 
-    - 常用命令
 - PM2进程守护
 - PM2配置和日志记录
 - PM2多进程
