@@ -32,5 +32,27 @@
 
 - PM2进程守护
 - PM2配置和日志记录
+
+    ```
+        {
+            "apps": {
+                "name": "pm2-test-server",
+                "script": "app.js",
+                "watch": true,
+                "ignore_watch": [
+                    "node_modules",
+                    "logs"
+                ],
+                "instances": "4",
+                "error_file": "logs/err.log",
+                "out_file": "logs/out.log",
+                "log_date_format": "YYYY-MM-DD HH:mm:ss"
+            }
+        }
+    ```
+
 - PM2多进程
+
+    `"instances": "4",`
+    
 - 服务器运维
